@@ -1,0 +1,5 @@
+{% set mariadb = salt['grains.filter_by']({
+    'default': {
+        'root_password': 'password',
+    },
+}, merge=salt['pillar.get']('mariadb:lookup')) %}
