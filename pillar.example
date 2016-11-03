@@ -1,2 +1,3 @@
 mariadb:
-    root_password: "examplerootpass"
+    lookup:
+        root_password: "examplerootpass"
