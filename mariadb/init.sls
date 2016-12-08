@@ -3,10 +3,16 @@
 common_mariadb_repo_installed:
     pkgrepo.managed:
         - humanname: MariaDB10.1 Repository
+        {% if grains['os'] == 'Ubuntu' %}
+        - name: deb [arch=amd64,i386,ppc64el] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu xenial main
+        - keyid: '0xF1656F24C74CD1D8'
+        - keyserver: keyserver.ubuntu.com
+        {% else %}
         - name: deb [arch=amd64,i386] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/debian jessie main
-        - file: /etc/apt/sources.list.d/MariaDB.list
         - keyid: '0xcbcb082a1bb943db'
         - keyserver: keyserver.ubuntu.com
+        {% endif %}
+        - file: /etc/apt/sources.list.d/MariaDB.list
         - refresh_db: True
 
 mariadb-server:
